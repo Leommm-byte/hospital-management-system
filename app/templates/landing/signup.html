@@ -50,6 +50,18 @@
                     <div class="col-lg-5 col-md-8">
                         <img src="{{ url_for('static', filename='assets/images/logo-yct.jpg') }}" height="22" class="mx-auto d-block" alt="">
                         <div class="card login-page shadow mt-4 rounded border-0">
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+                                        <ul class="mb-0 ps-3">
+                                            {% for message in messages %}
+                                                <li>{{ message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
                             <div class="card-body">
                                 <h4 class="text-center">Sign Up</h4>  
                                 <form action="/register" class="login-form mt-4" method="post" enctype="multipart/form-data">

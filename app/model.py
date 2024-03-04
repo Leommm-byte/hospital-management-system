@@ -19,6 +19,7 @@ app.config['SECRET_KEY'] = f'{os.environ.get("SECRET_KEY")}'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hms.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+
 db = SQLAlchemy(app)
 
 
@@ -108,8 +109,8 @@ with app.app_context():
 
 def upload_file_to_azure(file, filename):
     try:
-        blob_service_client = BlobServiceClient.from_connection_string(os.getenv('AZURE_STORAGE_CONNECTION_STRING'))
-        blob_client = blob_service_client.get_blob_client(os.getenv('AZURE_CONTAINER_NAME'), filename)
+        blob_service_client = BlobServiceClient.from_connection_string(os.environ.get('AZURE_STORAGE_CONNECTION_STRING_PREFIX') + os.environ.get('AZURE_STORAGE_CONNECTION_STRING_SUFFIX'))
+        blob_client = blob_service_client.get_blob_client(os.environ.get('AZURE_CONTAINER_NAME'), filename)
         blob_client.upload_blob(file)
         # Generate blob url and return
         blob_url = blob_client.url
