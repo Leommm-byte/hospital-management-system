@@ -3,7 +3,7 @@ from flask_login import login_user, LoginManager, login_required, current_user, 
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
-from .model import Patient, Admin, Doctor, Department, Appointment, db, app
+from .model import Patient, Admin, Doctor, Department, Appointment, db, app, upload_file_to_azure
 import secrets
 from PIL import Image
 from werkzeug.utils import secure_filename
@@ -105,10 +105,16 @@ def register():
         image = request.files['image']
         if image:
             filename = secure_filename(image.filename)
-            image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            image_file = filename
+            # image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # image_file = filename
+            blob_url = upload_file_to_azure(image, filename)
+            if blob_url:
+                image_file = blob_url
+            else:
+                flash('Failed to upload image', 'danger')
+                return redirect(url_for('register'))
         else:
-            image_file = 'default.png'
+            image_file = 'https://static-00.iconduck.com/assets.00/profile-default-icon-512x511-v4sw4m29.png'
 
         user = Patient(first_name=first_name, last_name=last_name, gender=gender, email=email, phone_number=phone_number, role_id=role_id, age=age, health_status=health_status, blood_group=blood_group, height=height, weight=weight, image_file=image_file)
         user.set_password(password)

@@ -8,6 +8,7 @@ from datetime import datetime
 import os
 from dotenv import load_dotenv
 import uuid
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 
 
 load_dotenv()
@@ -103,3 +104,16 @@ class Admin(User):
 
 with app.app_context():
     db.create_all()
+
+
+def upload_file_to_azure(file, filename):
+    try:
+        blob_service_client = BlobServiceClient.from_connection_string(os.getenv('AZURE_STORAGE_CONNECTION_STRING'))
+        blob_client = blob_service_client.get_blob_client(os.getenv('AZURE_CONTAINER_NAME'), filename)
+        blob_client.upload_blob(file)
+        # Generate blob url and return
+        blob_url = blob_client.url
+        return blob_url
+    except Exception as e:
+        print(e)
+        return None
