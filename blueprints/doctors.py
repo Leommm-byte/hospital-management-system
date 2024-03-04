@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, get_flashed_messages
 from flask_login import current_user, login_required, login_user, logout_user
-from app.model import db, Admin, Doctor, Department, Patient, Appointment, app
+from ..app.model import db, Admin, Doctor, Department, Patient, Appointment, app
 from functools import wraps
 import os
 from werkzeug.utils import secure_filename

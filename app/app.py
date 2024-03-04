@@ -3,7 +3,7 @@ from flask_login import login_user, LoginManager, login_required, current_user, 
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
-from model import Patient, Admin, Doctor, Department, Appointment, db, app
+from .model import Patient, Admin, Doctor, Department, Appointment, db, app
 import secrets
 from PIL import Image
 from werkzeug.utils import secure_filename
