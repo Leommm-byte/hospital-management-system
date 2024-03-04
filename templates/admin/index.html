@@ -1,0 +1,108 @@
+{% include "admin/head-sidebar.html" %}
+
+                <div class="container-fluid">
+                    <div class="layout-specing">
+                        <h5 class="mb-0">Dashboard</h5>
+
+                        <div class="row">
+                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                                <div class="card features feature-primary rounded border-0 shadow p-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon text-center rounded-md">
+                                            <i class="uil uil-bed h3 mb-0"></i>
+                                        </div>
+                                        <div class="flex-1 ms-2">
+                                            <h5 class="mb-0">{{ total_patients }}</h5>
+                                            <p class="text-muted mb-0">Patients</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+                            
+                            <!-- <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                                <div class="card features feature-primary rounded border-0 shadow p-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon text-center rounded-md">
+                                            <i class="uil uil-file-medical-alt h3 mb-0"></i>
+                                        </div>
+                                        <div class="flex-1 ms-2">
+                                            <h5 class="mb-0">$2164</h5>
+                                            <p class="text-muted mb-0">Avg. costs</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>end col -->
+                            
+                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                                <div class="card features feature-primary rounded border-0 shadow p-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon text-center rounded-md">
+                                            <i class="uil uil-social-distancing h3 mb-0"></i>
+                                        </div>
+                                        <div class="flex-1 ms-2">
+                                            <h5 class="mb-0">{{ total_doctors }}</h5>
+                                            <p class="text-muted mb-0">Staff Members</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+                            
+                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                                <div class="card features feature-primary rounded border-0 shadow p-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon text-center rounded-md">
+                                            <i class="uil uil-medkit h3 mb-0"></i>
+                                        </div>
+                                        <div class="flex-1 ms-2">
+                                            <h5 class="mb-0">{{ total_appointments }}</h5>
+                                            <p class="text-muted mb-0">Appointment</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+                            
+                            <!-- <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                                <div class="card features feature-primary rounded border-0 shadow p-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon text-center rounded-md">
+                                            <i class="uil uil-medical-drip h3 mb-0"></i>
+                                        </div>
+                                        <div class="flex-1 ms-2">
+                                            <h5 class="mb-0">10</h5>
+                                            <p class="text-muted mb-0">Operations</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>end col -->
+                        </div><!--end row-->
+
+                        <div class="row">
+                            <div class="col-xl-8 col-lg-7 mt-4">
+                                <div class="card shadow border-0 p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h6 class="align-items-center mb-0">Appointments by Gender</h6>
+                                    </div>
+                                    <div id="dashboard" class="apex-chart"></div>
+                                </div>
+                            </div><!--end col-->
+
+                            <div class="col-xl-4 col-lg-5 mt-4">
+                                <div class="card shadow border-0 p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h6 class="align-items-center mb-0">Patients by Department</h6>
+                                    </div>
+                                    <div id="department" class="apex-chart"></div>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div>
+                </div><!--end container-->
+
+        <script>
+            var maleCounts = {{ male_counts|tojson }};
+            var femaleCounts = {{ female_counts|tojson }};
+            var departmentNames = {{ top_departments|map(attribute='0')|list|tojson }};
+            var patientCounts = {{ top_departments|map(attribute='1')|list|tojson }};
+        </script>
+
+{% include "admin/footer-import.html" %}

@@ -1,0 +1,107 @@
+{% include "admin/head-sidebar.html" %}
+
+                <div class="container-fluid">
+                    <div class="layout-specing">
+                        <div class="d-md-flex justify-content-between">
+                            <h5 class="mb-0">Add New Doctor</h5>
+
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-8 mt-4">
+                                <div class="card border-0 p-4 rounded shadow">
+                                    
+            
+                                    <form class="mt-4" action="{{ url_for('admin.add_doctor') }}" method="post" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">First Name</label>
+                                                    <input name="first_name" id="name" type="text" class="form-control" placeholder="First Name :">
+                                                </div>
+                                            </div><!--end col-->
+            
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Last Name</label>
+                                                    <input name="last_name" id="name2" type="text" class="form-control" placeholder="Last Name :">
+                                                </div>
+                                            </div><!--end col-->
+            
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Your Email</label>
+                                                    <input name="email" id="email" type="email" class="form-control" placeholder="Your email :">
+                                                </div> 
+                                            </div><!--end col-->
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Password</label>
+                                                    <input name="password" id="password" type="password" class="form-control" placeholder="Password :">
+                                                </div> 
+                                            </div><!--end col-->
+            
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Phone no.</label>
+                                                    <input name="phone_number" id="number" type="text" class="form-control" placeholder="Phone no. :">
+                                                </div>                                                                               
+                                            </div><!--end col-->
+            
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Departments</label>
+                                                    <select class="form-select form-control" name="department">
+                                                        {% for department in departments %}
+                                                            <option value="{{ department.id }}">{{ department.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div><!--end col-->
+            
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Gender</label>
+                                                    <select class="form-select form-control" name="gender">
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div><!--end col-->
+
+                                            <!-- Image -->
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Image</label>
+                                                    <input type="file" class="form-control" name="image">
+                                                </div>
+                                            </div>
+            
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Your Bio Here</label>
+                                                    <textarea name="comments" id="comments" rows="3" class="form-control" placeholder="Bio :"></textarea>
+                                                </div>
+                                            </div>
+                                        </div><!--end row-->
+            
+                                        <button type="submit" class="btn btn-primary">Add Doctor</button>
+                                    </form>
+                                </div>
+                            </div><!--end col-->
+
+                            <div class="col-lg-4 mt-4">
+                                <div class="card rounded border-0 shadow">
+                                    <div class="p-4 border-bottom">
+                                        <h5 class="mb-0">Doctors List</h5>
+                                    </div>
+
+                                    <a href="doctors.html" class="btn btn-primary">All Doctors</a>
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div>
+                </div><!--end container-->
+
+{% include "admin/footer-import.html" %}

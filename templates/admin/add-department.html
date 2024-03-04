@@ -1,0 +1,32 @@
+{% include "admin/head-sidebar.html" %}
+                <div class="container-fluid">
+                    <div class="layout-specing">
+                        <div class="d-md-flex justify-content-between">
+                            <h5 class="mb-0">Add Department</h5>
+
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-8 mt-4">
+                                <div class="card border-0 p-4 rounded shadow">
+                                    
+            
+                                    <form class="mt-4" action="{{ url_for('admin.add_department') }}" method="post">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Department</label>
+                                                    <input name="department" id="name" type="text" class="form-control" placeholder="Department :">
+                                                </div>
+                                            </div><!--end col-->
+            
+                                        <button type="submit" class="btn btn-primary">Add Department</button>
+                                    </form>
+                                </div>
+                            </div><!--end col-->
+
+                        </div><!--end row-->
+                    </div>
+                </div><!--end container-->
+
+{% include "admin/footer-import.html" %}

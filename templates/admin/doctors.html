@@ -1,0 +1,40 @@
+{% include "admin/head-sidebar.html" %}
+
+                <div class="container-fluid">
+                    <div class="layout-specing">
+                        <div class="row">
+                            <div class="col-xl-9 col-md-6">
+                                <h5 class="mb-0">Doctors</h5>
+
+                                <nav aria-label="breadcrumb" class="d-inline-block mt-2">
+                                    <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
+                                        <li class="breadcrumb-item"><a href="index.html">YCT Medical</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Doctors</li>
+                                    </ul>
+                                </nav>
+                            </div><!--end col-->
+
+                            <div class="col-xl-3 col-md-6 mt-4 mt-md-0 text-md-end">
+                                <a href="{{ url_for('admin.add_doctor') }}" class="btn btn-primary">Add New Doctor</a>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                        
+                        <div class="row row-cols-md-2 row-cols-lg-5">
+                            {% for doctor in doctors %}
+                                <div class="col mt-4">
+                                    <div class="card team border-0 rounded shadow overflow-hidden">
+                                        <div class="team-img position-relative">
+                                            <img src="{{ url_for('static', filename='uploads/' + doctor.image_file) }}" class="img-fluid" alt="">
+                                        </div>
+                                        <div class="card-body content text-center">
+                                            <a href="#" class="title text-dark h5 d-block mb-0">{{ doctor.first_name }} {{ doctor.last_name }}</a>
+                                            <small class="text-muted speciality">{{ doctor.department.name }}</small>
+                                        </div>
+                                    </div>
+                                </div><!--end col-->       
+                            {% endfor %}
+                        </div><!--end row-->
+                    </div>
+                </div><!--end container-->
+
+{% include "admin/footer-import.html" %}
