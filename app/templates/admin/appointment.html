@@ -7,7 +7,7 @@
                                 <h5 class="mb-0">Appointment</h5>
                                 <nav aria-label="breadcrumb" class="d-inline-block mt-2">
                                     <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
-                                        <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
+                                        <li class="breadcrumb-item"><a href="{{ url_for('admin.admin_dashboard') }}">YCT Medicals</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Appointment</li>
                                     </ul>
                                 </nav>
@@ -41,7 +41,7 @@
                                                     <td class="p-3">
                                                         <a href="#" class="text-dark">
                                                             <div class="d-flex align-items-center">
-                                                                <img src="{{ url_for('static', filename='uploads/' + appointment.patient.image_file) }}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                                <img src="{{ appointment.patient.image_file }}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
                                                                 <span class="ms-2">{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</span>
                                                             </div>
                                                         </a>
@@ -55,7 +55,7 @@
                                                     <td class="p-3">
                                                         <a href="#" class="text-dark">
                                                             <div class="d-flex align-items-center">
-                                                                <img src="{{ url_for('static', filename='uploads/' + appointment.doctor.image_file) }}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                                <img src="{{ appointment.doctor.image_file }}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                                                 <span class="ms-2">Dr. {{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}</span>
                                                             </div>
                                                         </a>

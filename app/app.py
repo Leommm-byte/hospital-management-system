@@ -3,7 +3,7 @@ from flask_login import login_user, LoginManager, login_required, current_user, 
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
-from .model import Patient, Admin, Doctor, Department, Appointment, db, app, upload_file_to_azure
+from .model import Patient, Admin, Doctor, Role, Appointment, db, app, upload_file_to_azure
 import secrets
 from PIL import Image
 from werkzeug.utils import secure_filename
@@ -100,6 +100,14 @@ def register():
         weight = request.form['weight']
         gender = request.form['gender']
         role_id = 1
+
+        # Check if role with id 1 exists
+        role = Role.query.get(role_id)
+        if not role:
+            # If not, create it
+            role = Role(id=role_id, name='Patient')
+            db.session.add(role)
+            db.session.commit()
 
         # Handle the file upload
         image = request.files['image']

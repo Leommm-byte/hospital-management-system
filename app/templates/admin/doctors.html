@@ -24,7 +24,7 @@
                                 <div class="col mt-4">
                                     <div class="card team border-0 rounded shadow overflow-hidden">
                                         <div class="team-img position-relative">
-                                            <img src="{{ url_for('static', filename='uploads/' + doctor.image_file) }}" class="img-fluid" alt="">
+                                            <img src="{{ doctor.image_file }}" class="img-fluid" alt="">
                                         </div>
                                         <div class="card-body content text-center">
                                             <a href="#" class="title text-dark h5 d-block mb-0">{{ doctor.first_name }} {{ doctor.last_name }}</a>

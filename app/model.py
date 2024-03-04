@@ -16,7 +16,7 @@ load_dotenv()
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = f'{os.environ.get("SECRET_KEY")}'
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://hospitalmanagement.postgres.database.azure.com:5432/postgres?user=hms&password={os.environ.get("PGPASSWORD")}&sslmode=require'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://hospitalmanagement.postgres.database.azure.com:5432/hosmanage?user=hms&password={os.environ.get("PGPASSWORD")}&sslmode=require'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
@@ -36,8 +36,8 @@ class User(UserMixin, db.Model):
     phone_number = db.Column(db.String(20), nullable=False)
     bio = db.Column(db.Text, nullable=True)
     gender = db.Column(db.String(10), nullable=False)
-    image_file = db.Column(db.String(20), nullable=False, default='default.png')
-    password_hash = db.Column(db.String(128), nullable=False)
+    image_file = db.Column(db.String(256), nullable=False, default='default.png')
+    password_hash = db.Column(db.String(256), nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
 
     def set_password(self, password):

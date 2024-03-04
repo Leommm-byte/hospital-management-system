@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body p-3 pt-4">
                 <div class="d-flex align-items-center">
-                    <img src="{{ url_for('static', filename='uploads/' + appointment.patient.image_file) }}" class="avatar avatar-small rounded-pill" alt="">
+                    <img src="{{ appointment.patient.image_file }}" class="avatar avatar-small rounded-pill" alt="">
                     <h5 class="mb-0 ms-3">{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</h5>
                 </div>
                 <ul class="list-unstyled mb-0 d-md-flex justify-content-between mt-4">

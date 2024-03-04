@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, get_flashed_messages
 from flask_login import current_user, login_required, login_user, logout_user
-from ..model import db, Admin, Doctor, Department, Patient, Appointment, app
+from ..model import db, Admin, Doctor, Department, Patient, Appointment, app, Role, upload_file_to_azure
 from functools import wraps
 import os
 from werkzeug.utils import secure_filename
@@ -55,6 +55,16 @@ def admin_register():
         gender = request.form['gender']
         password = request.form['password']
         role_id = 3
+
+        # Check if role with id 3 exists
+        role = Role.query.get(role_id)
+        if not role:
+            # If not, create it
+            role = Role(id=role_id, name='Admin')
+            db.session.add(role)
+            db.session.commit()
+
+
         user = Admin(first_name=first_name, last_name=last_name, email=email, gender=gender, phone_number=phone_number, role_id=role_id)
         user.set_password(password)
         db.session.add(user)
@@ -104,14 +114,29 @@ def add_doctor():
 
         department_id = request.form['department']
 
+        # Check if role with id 2 exists
+        role = Role.query.get(role_id)
+        if not role:
+            # If not, create it
+            role = Role(id=role_id, name='Doctor')
+            db.session.add(role)
+            db.session.commit()
+
         # Handle the file upload
         image = request.files['image']
         if image:
             filename = secure_filename(image.filename)
-            image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            image_file = filename
+            # image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # image_file = filename
+            blob_url = upload_file_to_azure(image, filename)
+            print(blob_url)
+            if blob_url:
+                image_file = blob_url
+            else:
+                flash('Failed to upload image', 'danger')
+                return redirect(url_for('add_doctor'))
         else:
-            image_file = 'default.jpg'
+            image_file = 'https://static-00.iconduck.com/assets.00/profile-default-icon-512x511-v4sw4m29.png'
 
         user = Doctor(first_name=first_name, last_name=last_name, bio=bio, image_file=image_file, email=email, gender=gender, phone_number=phone_number, role_id=role_id, department_id=department_id)
         user.set_password(password)
@@ -192,14 +217,29 @@ def add_patient():
         gender = request.form['gender']
         role_id = 1
 
+        # Check if role with id 1 exists
+        role = Role.query.get(role_id)
+        if not role:
+            # If not, create it
+            role = Role(id=role_id, name='Patient')
+            db.session.add(role)
+            db.session.commit()
+
         # Handle the file upload
         image = request.files['image']
         if image:
             filename = secure_filename(image.filename)
-            image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            image_file = filename
+            # image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # image_file = filename
+            blob_url = upload_file_to_azure(image, filename)
+            print(blob_url)
+            if blob_url:
+                image_file = blob_url
+            else:
+                flash('Failed to upload image', 'danger')
+                return redirect(url_for('add_doctor'))
         else:
-            image_file = 'default.jpg'
+            image_file = 'https://static-00.iconduck.com/assets.00/profile-default-icon-512x511-v4sw4m29.png'
 
         user = Patient(first_name=first_name, last_name=last_name, gender=gender, email=email, phone_number=phone_number, role_id=role_id, age=age, health_status=health_status, blood_group=blood_group, height=height, weight=weight, image_file=image_file)
         user.set_password(password)
@@ -218,6 +258,7 @@ def add_patient():
 def view_patients():
     patients = Patient.query.all()
     admin = Admin.query.filter_by(id=current_user.id).first()
+    # count = 1
     return render_template('admin/patients.html', patients=patients, admin=admin)
 
 
