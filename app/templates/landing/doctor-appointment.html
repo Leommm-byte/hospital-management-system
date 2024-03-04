@@ -56,7 +56,7 @@
                                                 <td class="p-3">
                                                     <a href="#" class="text-dark">
                                                         <div class="d-flex align-items-center">
-                                                            <img src="{{ doctor.image_file }}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                            <img src="{{ appointment.patient.image_file }}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
                                                             <span class="ms-2">{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</span>
                                                         </div>
                                                     </a>
@@ -75,7 +75,7 @@
                                                     </a>
                                                 </td>
                                                 <td class="text-end p-3">
-                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-primary" data-bs-toggle="modal" data-bs-target="#viewappointment"><i class="uil uil-eye"></i></a>
+                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-primary" data-bs-toggle="modal" data-bs-target="#viewappointment{{ loop.index }}"><i class="uil uil-eye"></i></a>
                                                     <!-- <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment"><i class="uil uil-check-circle"></i></a>
                                                     <a href="#" class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal" data-bs-target="#cancelappointment"><i class="uil uil-times-circle"></i></a> -->
                                                 </td>
