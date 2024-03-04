@@ -3,13 +3,13 @@ from flask_login import login_user, LoginManager, login_required, current_user, 
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
-from model import Patient, Admin, Doctor, Department, Appointment, db, app, upload_file_to_azure
+from .model import Patient, Admin, Doctor, Department, Appointment, db, app, upload_file_to_azure
 import secrets
 from PIL import Image
 from werkzeug.utils import secure_filename
 from functools import wraps
-from blueprints.admin import admin
-from blueprints.doctors import doctor
+from .blueprints.admin import admin
+from .blueprints.doctors import doctor
 from uuid import UUID
 from datetime import datetime
 
