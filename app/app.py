@@ -8,8 +8,8 @@ import secrets
 from PIL import Image
 from werkzeug.utils import secure_filename
 from functools import wraps
-from blueprints.admin import admin
-from blueprints.doctors import doctor
+from .blueprints.admin import admin
+from .blueprints.doctors import doctor
 from uuid import UUID
 from datetime import datetime
 
